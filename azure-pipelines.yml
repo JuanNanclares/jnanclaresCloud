@@ -1,0 +1,33 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  GOOGLE_CREDENTIALS: $(GOOGLE_CREDENTIALS)
+
+stages:
+- stage: BuildAndPush
+  jobs:
+  - job: Build
+    steps:
+    - task: DownloadSecureFile@1
+      inputs:
+        secureFile: 'gcloud-key.json' # Nombre del archivo JSON subido a Secure Files
+
+    - script: |
+        echo $(GOOGLE_CREDENTIALS) > $(Build.SourcesDirectory)/gcloud-key.json
+        gcloud auth activate-service-account --key-file=$(Build.SourcesDirectory)/gcloud-key.json
+        gcloud config set project YOUR_GCP_PROJECT_ID
+        gcloud auth configure-docker
+      displayName: 'Authenticate with Google Cloud'
+
+    - script: ./gradlew build
+      displayName: 'Build with Gradle'
+
+    - script: |
+        docker build -t gcr.io/YOUR_GCP_PROJECT_ID/YOUR_IMAGE_NAME:$(Build.BuildId) .
+        docker push gcr.io/YOUR_GCP_PROJECT_ID/YOUR_IMAGE_NAME:$(Build.BuildId)
+      displayName: 'Build and Push Docker Image'
+
