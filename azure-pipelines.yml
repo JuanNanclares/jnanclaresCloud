@@ -14,7 +14,7 @@ stages:
     steps:
     - task: DownloadSecureFile@1
       inputs:
-        secureFile: 'gcloud-key.json' # Nombre del archivo JSON subido a Secure Files
+        secureFile: 'jnanclarescloud-6d8bec839266.json'
 
     - script: |
         echo $(GOOGLE_CREDENTIALS) > $(Build.SourcesDirectory)/gcloud-key.json
