@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: CI/CD Github Actions
 
 on:
   push:
@@ -38,4 +38,13 @@ jobs:
 
       - name: Push Docker image
         run: docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/cloud-run:${{ github.sha }}
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy cloud-run \
+            --image=gcr.io/${{ secrets.GCP_PROJECT_ID }}/cloud-run:${{ github.sha }} \
+            --platform managed \
+            --region us-east1 \
+            --allow-unauthenticated
+
 
