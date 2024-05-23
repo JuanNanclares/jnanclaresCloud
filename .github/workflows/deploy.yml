@@ -34,7 +34,7 @@ jobs:
         run: ./gradlew bootJar
 
       - name: Build Docker image
-        run: docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/cloud-run:${{ github.sha }} .
+        run: docker build --no-cache -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/cloud-run:${{ github.sha }} .
 
       - name: Push Docker image
         run: docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/cloud-run:${{ github.sha }}
