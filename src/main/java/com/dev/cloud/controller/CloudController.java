@@ -33,6 +33,12 @@ public class CloudController {
                                     @RequestParam(value = "limit", defaultValue = "100") int limit) {
         return pokemonClient.getPokemons(offset, limit);
     }
+
+    @GetMapping("/prueba")
+    @Operation(summary = "Prueba", description = "Endpoint de prueba")
+    public String test(){
+        return "Prueba ejecutada éxitosamente";
+    }
 }
 
 
