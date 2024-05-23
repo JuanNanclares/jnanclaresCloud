@@ -14,5 +14,6 @@ public class SwaggerConfig {
                         .title("API de Ejemplo")
                         .version("1.0")
                         .description("Esta es una API de ejemplo documentada con Swagger"));
+
     }
 }
