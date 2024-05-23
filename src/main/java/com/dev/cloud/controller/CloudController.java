@@ -29,13 +29,12 @@ public class CloudController {
         return "Bienvenido " + name + ", tu registro ha sido exitoso";
     }
 
-    /*@CrossOrigin
     @GetMapping("/pokemons")
     @Operation(summary = "Pokemon", description = "Retorna un listado de pokemons")
     public PokeResponse getPokemons(@RequestParam(value = "offset", defaultValue = "0") int offset,
                                     @RequestParam(value = "limit", defaultValue = "100") int limit) {
         return pokemonClient.getPokemons(offset, limit);
-    }*/
+    }
 
     @CrossOrigin
     @GetMapping("/prueba")
