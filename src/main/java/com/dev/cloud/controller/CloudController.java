@@ -15,18 +15,21 @@ public class CloudController {
     @Autowired
     private PokeClient pokemonClient;
 
+    @CrossOrigin
     @GetMapping("/saludar")
     @Operation(summary = "Saludar", description = "Devuelve un saludo de ejemplo")
     public String getHelloWorld() {
         return "Hola visitante, bienvenido a mi sitio web";
     }
 
+    @CrossOrigin
     @PostMapping("/registro")
     @Operation(summary = "Registro", description = "Devuelve un mensaje de registro de ejemplo")
     public String register(@RequestBody String name) {
         return "Bienvenido " + name + ", tu registro ha sido exitoso";
     }
 
+    @CrossOrigin
     @GetMapping("/pokemons")
     @Operation(summary = "Pokemon", description = "Retorna un listado de pokemons")
     public PokeResponse getPokemons(@RequestParam(value = "offset", defaultValue = "0") int offset,
@@ -34,6 +37,7 @@ public class CloudController {
         return pokemonClient.getPokemons(offset, limit);
     }
 
+    @CrossOrigin
     @GetMapping("/prueba")
     @Operation(summary = "Prueba", description = "Endpoint de prueba")
     public String test(){
