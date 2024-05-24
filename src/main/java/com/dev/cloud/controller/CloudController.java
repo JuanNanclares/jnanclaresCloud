@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1")
-@Tag(name = "Ejemplo", description = "API de ejemplo pruebas Jnanclares")
+@Tag(name = "Ejemplo", description = "API de ejemplo xxxxx Jnanclares")
 public class CloudController {
 
     @Autowired
